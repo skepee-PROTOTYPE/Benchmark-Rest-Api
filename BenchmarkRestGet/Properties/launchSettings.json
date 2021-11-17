@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "BenchmarkRestGet": {
+      "commandName": "Project",
+      "commandLineArgs": "https://gotwapi.azurewebsites.net/api/commanders 10 y"
+    }
+  }
+}

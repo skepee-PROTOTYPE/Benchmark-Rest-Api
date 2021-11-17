@@ -1,2 +1,2 @@
-# Benchmark-Rest-Api-Get
-Benchmark for rest API Get
+# BenchmarkRestGet
+ Benchmark for Rest API GET
