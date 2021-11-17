@@ -1,23 +1,24 @@
 # Benchmark Rest API Get
- Benchmark for Rest API GET
+Simple C# console to benchmark a Rest API with Get method.
+Sometimes I need to benchmark my Rest APIs and to understand if it is the case of some refactoring.
 
-Simple C# console code to benchmark a Rest API with Get method.
+
 
 ## How to use
 It can be run on then command line passing two arguments:
 
 `BenchmarkRestGet myurl numTimes`
-- myurl: Rest GET resource
-- numTimes: times to access to the resource.
+- *myurl*: Rest GET resource
+- *numTimes*: times to access to the resource.
 
 Alternatively you can pass a third paramter to add a log file:
 
 `BenchmarkRestGet myurl numTimes log`
-- log: Y/N to add a log file. The file will be saved in the folder where the exe is located. By default it creates the log file.
+- *log*: Y/N to add a log file. The file will be saved in the folder where the exe is located. By default it creates the log file.
 
 
 ## How it works
-For each time the stopWatch is created and if some data returns with status code 200 it calulcates the elapsed time.
+For each time the stopWatch is created and if some data returns with status code 200 it calculates the elapsed time.
 At the end of all iterations it calulates the max, min and avg elpased time.
 
 ## Some results
@@ -48,3 +49,6 @@ Results based on 10 iterations:
         Max elased time: 46455 ms
 ----------------------------------------------
 ```
+
+## Restrictions
+For now it is limited only to GET methods.
