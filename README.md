@@ -52,3 +52,8 @@ Results based on 10 iterations:
 
 ## Restrictions
 For now it is limited only to GET methods.
+
+## Next steps
+- Extending for POST, PUT and DELETE method.
+- Doing the same by using Python .
+
