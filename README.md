@@ -1,6 +1,6 @@
 # Benchmark Rest API Get
 Simple C# console to benchmark a Rest API with Get method.
-Sometimes I need to benchmark my Rest APIs and to understand if it is the case of some refactoring.
+Sometimes I need to benchmark my Rest APIs and to understand if it is the case of some refactoring or a re-design.
 
 
 
