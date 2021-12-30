@@ -2,7 +2,7 @@
   "profiles": {
     "BenchmarkRestGet": {
       "commandName": "Project",
-      "commandLineArgs": "https://gotwapi.azurewebsites.net/api/commanders 10 y"
+      "commandLineArgs": "https://localhost:7113/api/Portfolio/jsonPath 1 Delete 34"
     }
   }
 }
