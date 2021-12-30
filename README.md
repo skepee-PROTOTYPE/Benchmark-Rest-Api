@@ -14,15 +14,9 @@ It can be run on then command line passing two arguments:
   - Post, po 
   - Put, pu
   - Delete, del, d
- 
+- StartingIteration: optional integer, indicates the starting Id for iteration. It is used only for delete and put.
 
-
-the following 
-Alternatively you can pass a third paramter to add a log file:
-
-`BenchmarkRestGet myurl numTimes log`
-- *log*: Y/N to add a log file. The file will be saved in the folder where the exe is located. By default it creates the log file.
-
+A log file is automatically generated and saved in the folder where the executable is located.
 
 ## How it works
 For each time the stopWatch is created and if some data returns with status code 200 it calculates the elapsed time.
@@ -31,7 +25,7 @@ At the end of all iterations it calulates the max, min and avg elpased time.
 ## Some results
 For example if you run from console this command:
 
-`BenchmarkRestGet https://xxxxxxxx 10`
+`BenchmarkRestGet https://xxxxxxxx 10 g`
 
 you will have a resul like this:
 
@@ -57,10 +51,6 @@ Results based on 10 iterations:
 ----------------------------------------------
 ```
 
-## Restrictions
-For now it is limited only to GET methods.
-
 ## Next steps
-- Extending for POST, PUT and DELETE method.
 - Doing the same by using Python .
 
