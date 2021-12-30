@@ -6,14 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="IMyHandler.cs" />
-    <Compile Remove="MyDeleteHandler.cs" />
-    <Compile Remove="MyGetHandler.cs" />
-    <Compile Remove="MyPostHandler.cs" />
-    <Compile Remove="MyPutHandler.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
   </ItemGroup>
