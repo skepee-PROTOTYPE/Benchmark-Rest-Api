@@ -1,7 +1,6 @@
-# Benchmark Rest API Get
-Simple C# console to benchmark a Rest API with Get method.
-Sometimes I need to benchmark my Rest APIs and to understand if it is the case of some refactoring or a re-design.
-
+# Benchmark Rest API
+Simple C# console to benchmark a Rest API for Get, Post, Put, Delete.
+Sometimes I need to benchmark my APIs and to check if a refactoring or a re-design post testing is needed.
 
 
 ## How to use
@@ -10,7 +9,15 @@ It can be run on then command line passing two arguments:
 `BenchmarkRestGet myurl numTimes`
 - *myurl*: Rest GET resource
 - *numTimes*: times to access to the resource.
+- *method*: indicates which method to benchmark (Get, Post, Put, Delete). It accepts following values (not case sensitive):
+  - Get, g
+  - Post, po 
+  - Put, pu
+  - Delete, del, d
+ 
 
+
+the following 
 Alternatively you can pass a third paramter to add a log file:
 
 `BenchmarkRestGet myurl numTimes log`
