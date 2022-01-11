@@ -57,6 +57,8 @@ Results based on 10 iterations:
         Max elased time: 46455 ms
 ----------------------------------------------
 ```
+## Release notes
+nlog.config is the configuration file used for log. Edit this file to change name files and path.
 
 ## Next steps
 - Doing the same by using Python. 
