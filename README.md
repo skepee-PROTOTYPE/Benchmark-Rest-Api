@@ -1,34 +1,41 @@
 # Benchmark Rest API
-Simple C# console to benchmark a Rest API for Get, Post, Put, Delete.
-Sometimes I need to benchmark my APIs and to check if a refactoring or a re-design post testing is needed.
+C# console to benchmark a Rest API for Get, Post, Put, Delete.
 
+# Why this tool
+Sometimes I need to have a benchmark of my APIs, to test after release and to check whether a refactoring is needed.
 
 ## How to use
-It can be run on then command line passing two arguments:
+It can be run on then command line passing the following arguments:
 
-`BenchmarkRestGet myurl numTimes`
-- *myurl*: Rest GET resource
+`BenchmarkRestGet myurl numTimes method [startingIteration]`
+- *myurl*: Rest resource
 - *numTimes*: times to access to the resource.
 - *method*: indicates which method to benchmark (Get, Post, Put, Delete). It accepts following values (not case sensitive):
   - Get, g
   - Post, po 
   - Put, pu
   - Delete, del, d
-- StartingIteration: optional integer, indicates the starting Id for iteration. It is used only for delete and put.
+- *startingIteration: optional integer, indicates the starting Id for iteration. It is used only for delete and put. If missing the put and delete will start from initial Id.
 
-A log file is automatically generated and saved in the folder where the executable is located.
+A console log and a log file is generated. c# [ILogger](https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.logging.ilogger?view=dotnet-plat-ext-6.0) and [NLog](https://github.com/NLog/NLog) is used.
+
 
 ## How it works
-For each time the stopWatch is created and if some data returns with status code 200 it calculates the elapsed time.
-At the end of all iterations it calulates the max, min and avg elpased time.
+For each time a stopWatch instance is created and if some data returns with status code 200 it calculates the elapsed time.
+At the end of all iterations the max, min and avg elpased time is are calculated.
+
+## Uses
+- `BenchmarkRest https://abc 10 g`      : 10 times a GET from https://abc 
+- `BenchmarkRest https://abc 10 po`     : 10 times a POST from https://abc 
+- `BenchmarkRest https://abc 10 pu 100` : 10 times a PUT from https://abc starting from Id = 100
+- `BenchmarkRest https://abc 10 d 100`  : 10 times a DELETE from https://abc starting from Id = 100
 
 ## Some results
 For example if you run from console this command:
 
 `BenchmarkRestGet https://xxxxxxxx 10 g`
 
-you will have a resul like this:
-
+it will you will have a resul like this:
 ```
 Url: https://xxxxxxxx
 OK - iteration 1: 46455 ms at 16.27.57.418
@@ -52,5 +59,6 @@ Results based on 10 iterations:
 ```
 
 ## Next steps
-- Doing the same by using Python .
+- Doing the same by using Python. 
+- Generalize POST and DELETE by using an entity passed from command line.
 
