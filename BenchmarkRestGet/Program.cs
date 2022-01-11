@@ -1,5 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
+using NLog;
+using NLog.Web;
 using System;
 using System.Threading.Tasks;
 
@@ -28,6 +32,23 @@ namespace BenchmarkRestGet
 
             myParams = new Parameters(args);
 
+            var nlogger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
+
+            using ILoggerFactory loggerFactory =
+                       LoggerFactory.Create(builder =>
+                           builder.AddSimpleConsole(options =>
+                           {
+                               options.IncludeScopes = true;
+                               options.SingleLine = true;
+                               options.TimestampFormat = "hh:mm:ss ";
+                           }).AddConsole()
+                             .AddDebug()
+                             );
+
+            ILogger<Program> logger = loggerFactory.CreateLogger<Program>();
+
+            logger.LogInformation("Application started...");
+
             var builder = new HostBuilder()
                 .ConfigureServices((hostContext, services) =>
                 {
@@ -35,6 +56,13 @@ namespace BenchmarkRestGet
                     services.AddTransient<MyHttpHandler>();
 
                 }).UseConsoleLifetime();
+
+            builder.ConfigureLogging(logging =>
+            {
+                logging.ClearProviders();
+                logging.AddConsole();
+                //logging.SetMinimumLevel(LogLevel.Trace);
+            }).UseNLog();
 
             var host = builder.Build();
 
@@ -52,6 +80,7 @@ namespace BenchmarkRestGet
                     Console.WriteLine($"Error Occured: {ex.Message}");
                 }
             }
+            NLog.LogManager.Shutdown();
         }
     }
 }

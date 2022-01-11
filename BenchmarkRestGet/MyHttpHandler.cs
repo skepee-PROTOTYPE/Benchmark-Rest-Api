@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -40,7 +41,7 @@ namespace BenchmarkRestGet
 
                     case Method.Put:
                         request = new HttpRequestMessage(HttpMethod.Put, p.url);
-                        fromBodyObj = new { PortfolioId = p.startingIteration + i, PortfolioCode = $"xxxCode{i.ToString()}", PortfolioName = $"xxxName{i.ToString()}", PortfolioStatus = $"xxxStatus{i.ToString()}", PortfolioType = $"xxxType{i.ToString()}" };
+                        fromBodyObj = new { PortfolioId = p.startingIteration + i, PortfolioCode = $"yyyCode{i.ToString()}", PortfolioName = $"yyyName{i.ToString()}", PortfolioStatus = $"yyyStatus{i.ToString()}", PortfolioType = $"yyyType{i.ToString()}" };
                         request.Content = JsonContent.Create(fromBodyObj);
                         break;
 
@@ -57,7 +58,7 @@ namespace BenchmarkRestGet
                 var client = _httpFactory.CreateClient();
                 var res = await client.SendAsync(request);
 
-                if(res.StatusCode== System.Net.HttpStatusCode.OK)
+                 if(res.StatusCode== System.Net.HttpStatusCode.OK)
                 {
                     var JsonResponse = await res.Content.ReadAsStringAsync();
                     stopwatch.Stop();
@@ -69,6 +70,12 @@ namespace BenchmarkRestGet
                     _logger.LogInformation($"{res.StatusCode} - no data at {DateTime.Now.ToString("hh.mm.ss.fff")}");
                 }
             }
+
+            _logger.LogInformation($"Benchmark for {p.url}");
+            _logger.LogInformation($"Results based on {p.numIterations} iterations: ");
+            _logger.LogInformation($"        Avg elased time: {times.ToList().Average()} ms");
+            _logger.LogInformation($"        Min elased time: {times.ToList().Min()} ms");
+            _logger.LogInformation($"        Max elased time: {times.ToList().Max()} ms");
         }
     }
 }

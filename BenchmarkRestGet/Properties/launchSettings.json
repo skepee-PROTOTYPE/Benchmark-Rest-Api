@@ -2,7 +2,7 @@
   "profiles": {
     "BenchmarkRestGet": {
       "commandName": "Project",
-      "commandLineArgs": "https://localhost:7113/api/Portfolio/jsonPath 1 Delete 34"
+      "commandLineArgs": "https://localhost:7113/api/portfolio/jsonpath 5000 d 45001"
     }
   }
 }

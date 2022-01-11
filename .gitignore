@@ -5,3 +5,4 @@
 /.vs
 /BenchmarkRestGet/bin/Debug/net5.0
 /BenchmarkRestGet/obj
+/BenchmarkRestGet/bin/Release/net5.0
