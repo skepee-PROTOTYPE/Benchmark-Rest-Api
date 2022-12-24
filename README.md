@@ -21,7 +21,7 @@ It can be run in command line by invoking the command `BenchmarkRest` and passin
 During the execution of the command a console log will be displayed and a log file is generated at the end of the *numTimes* iterations. 
 In order to generate the log file the following packages have been used in the project:
 - [ILogger](https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.logging.ilogger?view=dotnet-plat-ext-6.0) 
-- [NLog](https://github.com/NLog/NLog).
+- [NLog](https://github.com/NLog/NLog)
 
 ## Statistics calulation
 For each iteration of *numTimes* a stopWatch instance is instantiated and if some data returns with status code 200 the elapsed time is calculated.
