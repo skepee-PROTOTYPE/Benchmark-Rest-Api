@@ -1,8 +1,8 @@
 {
   "profiles": {
-    "BenchmarkRestGet": {
+    "BenchmarkRest": {
       "commandName": "Project",
-      "commandLineArgs": "https://localhost:7113/api/portfolio/jsonpath 5000 d 45001"
+      "commandLineArgs": "https://localhost:7230/api/Portfolio/ef6_0 5000 po {\\\"portfolioCode\\\":\\\"ABCD10\\\",\\\"portfolioName\\\":\\\"NameABCD10\\\",\\\"portfolioType\\\":\\\"Type1\\\",\\\"portfolioStatus\\\":\\\"Status2\\\"} "
     }
   }
 }

@@ -1,14 +1,15 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using BenchmarkRest;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Json;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace BenchmarkRestGet
+namespace BenchmarkRest
 {
-    public class MyHttpHandler 
+    public class MyHttpHandler
     {
         private readonly ILogger _logger;
         private IHttpClientFactory _httpFactory { get; set; }
@@ -20,36 +21,25 @@ namespace BenchmarkRestGet
 
         public async Task Run(Parameters p)
         {
-            double[] times= new double[p.numIterations];
-
-            HttpRequestMessage request = new HttpRequestMessage();
-            object fromBodyObj;
+            double[] times = new double[p.numIterations];
 
             for (int i = 0; i < p.numIterations; i++)
             {
-                switch (Enum.Parse(typeof(Method), p.method))
+                HttpRequestMessage request = new HttpRequestMessage();
+
+                request.Method = p.method;
+
+                var obj = new MyDynamicClass(p.fromBody);
+
+                if (request.Method == HttpMethod.Post || request.Method == HttpMethod.Put)
                 {
-                    case Method.Get:
-                        request = new HttpRequestMessage(HttpMethod.Get, p.url);
-                        break;
-
-                    case Method.Post:
-                        request = new HttpRequestMessage(HttpMethod.Post, p.url);
-                        fromBodyObj = new { PortfolioCode = $"xxxCode{i.ToString()}", PortfolioName = $"xxxName{i.ToString()}", PortfolioStatus = $"xxxStatus{i.ToString()}", PortfolioType = $"xxxType{i.ToString()}" };
-                        request.Content = JsonContent.Create(fromBodyObj);
-                        break;
-
-                    case Method.Put:
-                        request = new HttpRequestMessage(HttpMethod.Put, p.url);
-                        fromBodyObj = new { PortfolioId = p.startingIteration + i, PortfolioCode = $"yyyCode{i.ToString()}", PortfolioName = $"yyyName{i.ToString()}", PortfolioStatus = $"yyyStatus{i.ToString()}", PortfolioType = $"yyyType{i.ToString()}" };
-                        request.Content = JsonContent.Create(fromBodyObj);
-                        break;
-
-                    case Method.Delete:
-                        request = new HttpRequestMessage(HttpMethod.Delete, p.url);
-                        fromBodyObj = p.startingIteration + i;
-                        request.Content = JsonContent.Create(fromBodyObj);
-                        break;
+                    request.RequestUri = new Uri(p.url);
+                    string json = obj.UpdateProperties(i);
+                    request.Content = new StringContent(json, Encoding.UTF8, "application/json");
+                }
+                else
+                {
+                    request.RequestUri = new Uri(p.url + "/" + obj.props.First().Value);
                 }
 
                 var stopwatch = new Stopwatch();
@@ -58,7 +48,7 @@ namespace BenchmarkRestGet
                 var client = _httpFactory.CreateClient();
                 var res = await client.SendAsync(request);
 
-                 if(res.StatusCode== System.Net.HttpStatusCode.OK)
+                if (res.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     var JsonResponse = await res.Content.ReadAsStringAsync();
                     stopwatch.Stop();

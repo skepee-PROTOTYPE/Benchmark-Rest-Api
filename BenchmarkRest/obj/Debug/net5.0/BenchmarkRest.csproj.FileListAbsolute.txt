@@ -52,3 +52,4 @@ C:\Users\MARCE\source\repos\skepee\Benchmark-Rest-Api\BenchmarkRest\obj\Debug\ne
 C:\Users\MARCE\source\repos\skepee\Benchmark-Rest-Api\BenchmarkRest\obj\Debug\net5.0\BenchmarkRest.pdb
 C:\Users\MARCE\source\repos\skepee\Benchmark-Rest-Api\BenchmarkRest\obj\Debug\net5.0\BenchmarkRest.genruntimeconfig.cache
 C:\Users\MARCE\source\repos\skepee\Benchmark-Rest-Api\BenchmarkRest\obj\Debug\net5.0\ref\BenchmarkRest.dll
+C:\Users\MARCE\source\repos\skepee\Benchmark-Rest-Api\BenchmarkRest\bin\Debug\net5.0\Newtonsoft.Json.dll

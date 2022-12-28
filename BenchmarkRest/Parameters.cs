@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.Http;
 
-namespace BenchmarkRestGet
+namespace BenchmarkRest
 {
     public class Parameters
     {
         public string url { get; set; }
         public int numIterations { get; set; }
-        public string method { get; set; }
+        public HttpMethod method { get; set; }
+        public string fromBody { get; set; }
         public int startingIteration { get; set; }
 
         public Parameters(string[] args)
@@ -18,38 +16,35 @@ namespace BenchmarkRestGet
             url = args[0];
             numIterations = Convert.ToInt32(args[1]);
             method = GetMethodType(args[2].ToUpper());
-            if (args.Length==4) 
-                startingIteration = Convert.ToInt32(args[3]);
+            fromBody = args[3].ToString();
+            if (args.Length == 5)
+                startingIteration = Convert.ToInt32(args[4]);
         }
 
-        private string GetMethodType(string method)
+        private HttpMethod GetMethodType(string method)
         {
-            string res= string.Empty;
             switch (method)
             {
                 case "GET":
-                case"G":
-                    res= "Get";
-                    break;
+                case "G":
+                    return HttpMethod.Get;
 
                 case "POST":
                 case "PO":
-                    res = "Post";
-                    break;
+                    return HttpMethod.Post;
 
                 case "PUT":
                 case "PU":
-                    res = "Put";
-                    break;
+                    return HttpMethod.Put;
 
                 case "DELETE":
                 case "DEL":
                 case "D":
-                    res = "Delete";
-                    break;            }
+                    return HttpMethod.Delete;
 
-            return res;        
+                default:
+                    return null;
+            }
         }
-
     }
 }

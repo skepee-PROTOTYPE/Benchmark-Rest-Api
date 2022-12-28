@@ -1,23 +1,13 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Console;
 using NLog;
 using NLog.Web;
 using System;
 using System.Threading.Tasks;
 
-namespace BenchmarkRestGet
+namespace BenchmarkRest
 {
-    enum Method
-    { 
-        Get,
-        Post,
-        Put,
-        Patch,
-        Delete
-    }
-
     class Program
     {
         private static Parameters myParams { get; set; }
@@ -31,8 +21,8 @@ namespace BenchmarkRestGet
                 Console.WriteLine(" - arg[0]: string, url to test");
                 Console.WriteLine(" - arg[1]: integer, number of iterations");
                 Console.WriteLine(" - arg[2]: http verb: Get (g), Post (po), Put (pu), Delete (del)(d)");
-                Console.WriteLine(" - arg[3]: integer, id starting value for Put and Delete. If missing id starting value is equal to 1");
-                Console.WriteLine(" - arg[4]: string, fromBody json for Put and Delete.");
+                Console.WriteLine(" - arg[3]: string, fromBody json for Post, Put and Delete.");
+                Console.WriteLine(" - arg[4]: integer, id starting value for Put and Delete. If missing id starting value is equal to 1");
                 return;
             }
 
@@ -48,8 +38,7 @@ namespace BenchmarkRestGet
 
             using ILoggerFactory loggerFactory =
                        LoggerFactory.Create(builder =>
-                           builder.AddSimpleConsole(options =>
-                           {
+                           builder.AddSimpleConsole(options => {
                                options.IncludeScopes = true;
                                options.SingleLine = true;
                                options.TimestampFormat = "hh:mm:ss ";
@@ -62,15 +51,13 @@ namespace BenchmarkRestGet
             logger.LogInformation("Application started...");
 
             var builder = new HostBuilder()
-                .ConfigureServices((hostContext, services) =>
-                {
+                .ConfigureServices((hostContext, services) => {
                     services.AddHttpClient();
                     services.AddTransient<MyHttpHandler>();
 
                 }).UseConsoleLifetime();
 
-            builder.ConfigureLogging(logging =>
-            {
+            builder.ConfigureLogging(logging => {
                 logging.ClearProviders();
                 logging.AddConsole();
                 //logging.SetMinimumLevel(LogLevel.Trace);
