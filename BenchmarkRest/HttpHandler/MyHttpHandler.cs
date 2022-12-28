@@ -13,7 +13,7 @@ namespace BenchmarkRest.HttpHandler
     {
         private readonly ILogger _logger;
         private IHttpClientFactory _httpFactory { get; set; }
-        public  IMyDynamicClass _objJson;
+        private IMyDynamicClass _objJson;
 
         public MyHttpHandler(ILogger<MyHttpHandler> logger, IHttpClientFactory httpFactory)
         {
@@ -24,7 +24,7 @@ namespace BenchmarkRest.HttpHandler
         public async Task Run(Parameters p)
         {
             double[] times = new double[p.numIterations];
-            var objJson = new MyDynamicClass(p.fromBody);
+            _objJson = new MyDynamicClass(p.fromBody);
 
             for (int i = 0; i < p.numIterations; i++)
             {

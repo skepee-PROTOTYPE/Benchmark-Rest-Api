@@ -86,16 +86,5 @@ namespace BenchmarkRest
             }
             LogManager.Shutdown();
         }
-
-        private static Func<IServiceProvider, MyHttpHandler> AddMyDynamicClass()
-        {
-            throw new NotImplementedException();
-        }
-
-        private static MyDynamicClass AddMyDynamicClassq()
-        {
-            var objJson = new MyDynamicClass(myParams.fromBody);
-            return objJson;
-        }
     }
 }
