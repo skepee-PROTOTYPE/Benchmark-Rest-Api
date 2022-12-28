@@ -3,22 +3,19 @@ using System.Net.Http;
 
 namespace BenchmarkRest
 {
-    public class Parameters
+    public class ApiParam
     {
         public string url { get; set; }
         public int numIterations { get; set; }
-        public HttpMethod method { get; set; }
-        public string fromBody { get; set; }
-        public int startingIteration { get; set; }
+        public HttpMethod httpVerb { get; set; }
+        public ApiData apiData { get; set; }
 
-        public Parameters(string[] args)
+        public ApiParam(string[] args)
         {
             url = args[0];
             numIterations = Convert.ToInt32(args[1]);
-            method = GetMethodType(args[2].ToUpper());
-            fromBody = args[3].ToString();
-            if (args.Length == 5)
-                startingIteration = Convert.ToInt32(args[4]);
+            httpVerb = GetMethodType(args[2].ToUpper());
+            apiData = new ApiData(args[3]);
         }
 
         private HttpMethod GetMethodType(string method)

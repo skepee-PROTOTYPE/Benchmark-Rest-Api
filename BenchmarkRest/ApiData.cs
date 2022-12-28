@@ -3,13 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Dynamic;
 
-namespace BenchmarkRest.DynamicClass
+namespace BenchmarkRest
 {
-    public class MyDynamicClass : IMyDynamicClass
+    public class ApiData
     {
         public Dictionary<string, object> props { get; set; }
 
-        public MyDynamicClass(string json)
+        public ApiData(string json)
         {
             props = new Dictionary<string, object>();
             var obj = JsonConvert.DeserializeObject<ExpandoObject>(json);

@@ -4,6 +4,6 @@ namespace BenchmarkRest.HttpHandler
 {
     public interface IMyHttpHandler
     {
-        Task Run(Parameters p);
+        Task Run(ApiParam p);
     }
 }
