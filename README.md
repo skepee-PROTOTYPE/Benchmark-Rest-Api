@@ -1,8 +1,9 @@
 # Benchmark Rest API
-C# console useful to benchmark a Rest API for Get, Post, Put and Delete verbs.
+C# console to benchmark a Rest API for Get, Post, Put and Delete verbs.
 
 # Why this tool
-Sometimes I need to have a benchmark of my APIs, to test an API after release and to check whether a refactoring is needed or to investigate some architectural aspects.
+Sometimes a benchmark of your API is needed, to test the API wherever is located, in production or localhost, to check whether a refactoring is needed or to investigate some architectural aspects.
+A log file and a statistic is generated.
 
 ## How to use
 It can be run in command line by invoking the command `BenchmarkRest` and passing the following arguments:
@@ -15,6 +16,9 @@ It can be run in command line by invoking the command `BenchmarkRest` and passin
   - Post, po 
   - Put, pu
   - Delete, del, d
+- *json*: parameters used for Api in json format. In particular:
+  - Post, Put: json will be passed in Body
+  - Get, Delete: json will ne passed in url
 - *startingIteration*: optional integer, indicates the starting Id for iteration. It is used only for delete and put verbs in order to seek the Id for update or delete. If this parameter is missing the put and delete will start from initial Id.
 
 ## Log file
@@ -35,10 +39,18 @@ The elpased time for each iteration is in memory and at the end of all iteration
 - avg
 
 # Use of invoking command:
-- `BenchmarkRest https://abc 10 g`      : 10 times a GET from https://abc 
-- `BenchmarkRest https://abc 10 po`     : 10 times a POST from https://abc 
-- `BenchmarkRest https://abc 10 pu 100` : 10 times a PUT from https://abc starting from Id = 100
-- `BenchmarkRest https://abc 10 d 100`  : 10 times a DELETE from https://abc starting from Id = 100
+JsonData contains parameters for the Api. For example by passing the following Json:
+`{\"portfolioId\":\"10\"}`
+the Api will use portfolioId as parameter with value equals to 10.
+`numTimes` values determines then ending value of portfolioId. If `numTimes` equals to 5 the parameter portfolioId will have values between 10 and 15.
+
+In this way, the following commands will use portfolioId as parameter with values between 10 and 30
+- `BenchmarkRest https://abc 20 g {\"portfolioId\":\"10\"}`      : 20 times a GET from https://abc 
+- `BenchmarkRest https://abc 20 po {\"portfolioId\":\"10\"}`     : 20 times a POST from https://abc
+
+The following commands will use portfolioId as parameter with values between 10 and 30
+- `BenchmarkRest https://abc 20 pu 100 {\"portfolioId\":\"10\"}` : 20 times a PUT from https://abc starting from Id = 100 with portfolioId values between 10 and 30
+- `BenchmarkRest https://abc 20 d 100 {\"portfolioId\":\"10\"}`  : 20 times a DELETE from https://abc starting from Id = 100 with portfolioId values between 10 and 30
 
 # Results
 ```
