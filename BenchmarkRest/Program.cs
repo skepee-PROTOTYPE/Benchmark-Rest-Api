@@ -28,7 +28,7 @@ namespace BenchmarkRest
                 return;
             }
 
-            if (args.Length <= 1 || args.Length > 5)
+            if (args.Length > 5)
             {
                 Console.WriteLine("not valid input arguments. Unable to continue.");
                 return;
