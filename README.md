@@ -42,26 +42,20 @@ The elpased time for each iteration is in memory and at the end of all iteration
 apiParams contains parameters for the api. For example by passing the following Json:
 `{\"portfolioId\":\"10\"}`
 the api will use `portfolioId` as parameter with value equals to `10`.
-`numIterations` determines then ending value of `portfolioId`. If `numIterations` equals to `5`, `BenchmarkRest` will run with `portfolioId` having values between `10` and `15`.
+`numIterations` determines how many times the api will be invoked. If `numIterations` equals to `5`, `BenchmarkRest` will run with `portfolioId` having values between `10` and `14`.
 
-In this way, the following commands will use `portfolioId` as parameter with values between `10` and `30`
-- `BenchmarkRest https://abc 20 g {\"portfolioId\":\"10\"}`  : 20 times a GET from `https://abc` (`https://abc/10` ... `https://abc/30`)
-- `BenchmarkRest https://abc 20 po {\"portfolioId\":\"10\"}` : 20 times a POST from `https://abc` passing in body `portfolioId` with values between 10 and 30
-- `BenchmarkRest https://abc 20 pu {\"portfolioId\":\"10\"}` : 20 times a PUT from `https://abc` passing in body `portfolioId` with values between 10 and 30
-- `BenchmarkRest https://abc 20 d {\"portfolioId\":\"10\"}`  : 20 times a DELETE from `https://abc` (`https://abc/10` ... `https://abc/30`)
+In this way, the following commands will use `portfolioId` as parameter with values between `10` and `29`
+- `BenchmarkRest https://abc 20 g {\"portfolioId\":\"10\"}`  : 20 times a GET from `https://abc` (`https://abc/10` ... `https://abc/29`)
+- `BenchmarkRest https://abc 20 po {\"portfolioId\":\"10\"}` : 20 times a POST from `https://abc` passing in body `portfolioId` with values between `10` and `29`
+- `BenchmarkRest https://abc 20 pu {\"portfolioId\":\"10\"}` : 20 times a PUT from `https://abc` passing in body `portfolioId` with values between `10` and `29`
+- `BenchmarkRest https://abc 20 d {\"portfolioId\":\"10\"}`  : 20 times a DELETE from `https://abc` (`https://abc/10` ... `https://abc/29`)
 
-# Results
+# Example result
 ```
 Url: https://abc
 OK - iteration 1: 46455 ms at 16.27.57.418
 OK - iteration 2: 891 ms at 16.27.58.324
-OK - iteration 3: 715 ms at 16.27.59.039
-OK - iteration 4: 662 ms at 16.27.59.702
-OK - iteration 5: 681 ms at 16.28.00.384
-OK - iteration 6: 678 ms at 16.28.01.062
-OK - iteration 7: 674 ms at 16.28.01.736
-OK - iteration 8: 674 ms at 16.28.02.411
-OK - iteration 9: 692 ms at 16.28.03.103
+...
 OK - iteration 10: 711 ms at 16.28.03.815
 
 ----------------------------------------------
