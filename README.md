@@ -9,7 +9,7 @@ This tool through command line helps you to run your api as many times as you wa
 ## How to use
 It can be run in command line by invoking the command `BenchmarkRest` and passing the following arguments:
 
-`BenchmarkRest myurl numTimes method [startingIteration]`
+`BenchmarkRest <url> <numIterations> <httpVerb> <apiParams>`
 - *url*: Rest api resource
 - *numIterations*: number of times to use *url* resource.
 - *httpVerb*: indicates which verb we want to benchmark (Get, Post, Put, Delete). It accepts one the following values (uppercase or lowercase it doesn't matter):
