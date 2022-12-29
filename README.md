@@ -72,5 +72,11 @@ Results based on 10 iterations:
         Max elased time: 46455 ms
 ----------------------------------------------
 ```
+## Implicit assumptions for use of this tool
+In order to use this tool for your api there are some implicit assumptions:
+- `apiParams` values will be passed in Body section for Post and Put
+- `apiParams` value will be passed in url for Get and Delete.
+
+
 ## Release notes
 nlog.config is the configuration file used for log. Edit this file to change name files and path.
