@@ -2,7 +2,7 @@
   "profiles": {
     "BenchmarkRest": {
       "commandName": "Project",
-      "commandLineArgs": "https://localhost:7230/api/Portfolio/ef6_0 10 g {\\\"portfolioId\\"
+      "commandLineArgs": "https://localhost:7230/api/Portfolio/ef6_0 5000 pu {\\\"portfolioId\\\":\\\"10\\\",\\\"portfolioCode\\\":\\\"ABCD10\\\",\\\"portfolioName\\\":\\\"NameABCD10\\\",\\\"portfolioType\\\":\\\"Type1\\\",\\\"portfolioStatus\\\":\\\"Status2\\\"}"
     }
   }
 }

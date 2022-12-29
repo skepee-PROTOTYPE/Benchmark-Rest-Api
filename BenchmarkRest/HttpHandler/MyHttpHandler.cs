@@ -33,10 +33,19 @@ namespace BenchmarkRest.HttpHandler
                     {
                         request.RequestUri = new Uri(p.url);
                         string json = p.apiData.UpdateProperties(i);
+                        _logger.LogInformation($"HttpVerb: {request.Method} - Api Data: {json}");
                         request.Content = new StringContent(json, Encoding.UTF8, "application/json");
                     }
                     else
-                        request.RequestUri = new Uri(p.url + "/" + p.apiData.props.First().Value);
+                    {
+                        long valInt;
+                        if (long.TryParse(p.apiData.props.First().Value.ToString(), out valInt))
+                        {
+                            String uri = p.url + "/" + (Convert.ToInt64(valInt + i).ToString());
+                            _logger.LogInformation($"HttpVerb: {request.Method} - Api Data: {uri}");
+                            request.RequestUri = new Uri(uri);
+                        }
+                    }
 
                 var stopwatch = new Stopwatch();
                 stopwatch.Start();
