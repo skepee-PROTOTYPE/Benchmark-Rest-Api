@@ -28,24 +28,27 @@ namespace BenchmarkRest.HttpHandler
                 var request = new HttpRequestMessage();
                 request.Method = p.httpVerb;
 
-                if (p.apiData.props.Any())
-                    if (request.Method == HttpMethod.Post || request.Method == HttpMethod.Put)
-                    {
+                if (request.Method == HttpMethod.Post || request.Method == HttpMethod.Put)
+                {
+                    if (p.apiData.props.Any())
+                    { 
                         request.RequestUri = new Uri(p.url);
                         string json = p.apiData.UpdateProperties(i);
                         _logger.LogInformation($"HttpVerb: {request.Method} - Api Data: {json}");
                         request.Content = new StringContent(json, Encoding.UTF8, "application/json");
                     }
-                    else
-                    {
-                        long valInt;
-                        if (long.TryParse(p.apiData.props.First().Value.ToString(), out valInt))
-                        {
-                            String uri = p.url + "/" + (Convert.ToInt64(valInt + i).ToString());
-                            _logger.LogInformation($"HttpVerb: {request.Method} - Api Data: {uri}");
-                            request.RequestUri = new Uri(uri);
-                        }
-                    }
+                }
+                else
+                {
+                    String uri = p.url;
+                    long valInt;
+
+                    if (p.apiData!=null && p.apiData.props.Any() && long.TryParse(p.apiData.props.First().Value.ToString(), out valInt))
+                        uri += "/" + (Convert.ToInt64(valInt + i).ToString());
+
+                    _logger.LogInformation($"HttpVerb: {request.Method} - Api Data: {uri}");
+                    request.RequestUri = new Uri(uri);
+                }
 
                 var stopwatch = new Stopwatch();
                 stopwatch.Start();

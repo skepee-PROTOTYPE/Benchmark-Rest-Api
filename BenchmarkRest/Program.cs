@@ -24,7 +24,7 @@ namespace BenchmarkRest
                 Console.WriteLine(" - <url>: string, url to test");
                 Console.WriteLine(" - <numIterations>: integer, number of iterations");
                 Console.WriteLine(" - <httpVerb>: http verb: Get (g), Post (po), Put (pu), Delete (del)(d)");
-                Console.WriteLine(" - <apiParams>: string in Json format. Used to pass parameters in Body for Post, Put and Delete and in Url for Get.");
+                Console.WriteLine(" - <apiParams>: string in Json format. Used to pass parameters in Body for Post, Put and Delete or in Url for Get if needed.");
                 return;
             }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Http;
 
 namespace BenchmarkRest
@@ -15,7 +16,8 @@ namespace BenchmarkRest
             url = args[0];
             numIterations = Convert.ToInt32(args[1]);
             httpVerb = GetMethodType(args[2].ToUpper());
-            apiData = new ApiData(args[3]);
+            if (args.Count()>3)
+                apiData = new ApiData(args[3]);
         }
 
         private HttpMethod GetMethodType(string method)
