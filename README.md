@@ -1,8 +1,12 @@
 # Benchmark Rest API
-C# console to benchmark a Rest API for Get, Post, Put and Delete verbs.
+C# console to benchmark a Rest API with Get, Post, Put and Delete verbs.
 
 # Why this tool
-Sometimes a benchmark of your api is needed, and you may need to test the api wherever is located, in production or localhost, to check whether a refactoring is needed or to investigate some architectural aspects.
+Sometimes a benchmark of your api is needed, and you might need to test the api wherever it is located, maybe your dev environment or production or even on localhost.
+This step can be useful in different situations, to check if:
+ - your API is still working 
+ - a refactoring is needed
+ - to investigate some architectural aspects.
 
 This tool through command line helps you to run your api as many times as you want and generates a statistic for you.
 
@@ -17,7 +21,7 @@ It can be run in command line by invoking the command `BenchmarkRest` and passin
   - Post, po 
   - Put, pu
   - Delete, del, d
-- *apiParams*: parameters used for Api in json format. In particular:
+- *apiParams*: optional, used to pass parameters in json format. In particular:
   - Post, Put: params will be passed in Body
   - Get, Delete: params will be passed in url
 
