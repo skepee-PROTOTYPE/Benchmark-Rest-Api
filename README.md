@@ -78,3 +78,6 @@ In order to use this tool for your api there are some implicit assumptions:
 
 ## Release notes
 nlog.config is the configuration file used for log. Edit this file to change name files and path.
+
+## Next steps
+Actually the tool works for a generic API with no authorization key. Next step is to make the tool by passing a Header that at the moment is missing.
