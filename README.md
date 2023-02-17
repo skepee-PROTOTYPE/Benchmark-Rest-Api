@@ -80,7 +80,3 @@ In order to use this tool for your api there are some implicit assumptions:
 
 ## Release notes
 nlog.config is the configuration file used for log. Edit this file to change name files and path.
-
-## Next steps
-Another step is to run the number of iterations asynchronusly.
-
