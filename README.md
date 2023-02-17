@@ -21,9 +21,11 @@ It can be run in command line by invoking the command `BenchmarkRest` and passin
   - Post, po 
   - Put, pu
   - Delete, del, d
-- *apiParams*: optional, used to pass parameters in json format. In particular:
+- *-d {apiParams}*: optional, used to pass parameters in json format. In particular:
   - Post, Put: params will be passed in Body
   - Get, Delete: params will be passed in url
+- *-h {headers}*: optional, used to pass headers in Json format. Used to pass parameters in Header.
+  
 
 ## Log file
 Once the command runs with the right parameters, a console log will be displayed and a log file is generated at the end of the *numIterations* iterations. 
@@ -80,6 +82,5 @@ In order to use this tool for your api there are some implicit assumptions:
 nlog.config is the configuration file used for log. Edit this file to change name files and path.
 
 ## Next steps
-Actually the tool works for a generic API with no authorization key. Next step is to make the tool by passing a Header that at the moment is missing.
 Another step is to run the number of iterations asynchronusly.
 
