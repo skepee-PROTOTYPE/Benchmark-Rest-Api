@@ -24,11 +24,12 @@ namespace BenchmarkRest
                 Console.WriteLine(" - <url>: string, url to test");
                 Console.WriteLine(" - <numIterations>: integer, number of iterations");
                 Console.WriteLine(" - <httpVerb>: http verb: Get (g), Post (po), Put (pu), Delete (del)(d)");
-                Console.WriteLine(" - <apiParams>: string in Json format. Used to pass parameters in Body for Post, Put and Delete or in Url for Get if needed.");
+                Console.WriteLine(" - -d {apiParams}: data api in Json format. Used to pass parameters in Body for Post, Put and Delete or in Url for Get if needed.");
+                Console.WriteLine(" - -h {header}: headers in Json format. Used to pass parameters in Header.");
                 return;
             }
 
-            if (args.Length > 4)
+            if (args.Length < 3)
             {
                 Console.WriteLine("not valid input arguments. Unable to continue.");
                 return;

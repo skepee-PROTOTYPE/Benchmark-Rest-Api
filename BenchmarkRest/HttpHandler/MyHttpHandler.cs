@@ -11,7 +11,7 @@ namespace BenchmarkRest.HttpHandler
     public class MyHttpHandler : IMyHttpHandler
     {
         private readonly ILogger _logger;
-        private IHttpClientFactory _httpFactory { get; set; }
+        private readonly IHttpClientFactory _httpFactory;
 
         public MyHttpHandler(ILogger<MyHttpHandler> logger, IHttpClientFactory httpFactory)
         {
@@ -27,6 +27,10 @@ namespace BenchmarkRest.HttpHandler
             {
                 var request = new HttpRequestMessage();
                 request.Method = p.httpVerb;
+
+                //adding header values
+                foreach (var prop in p.header.props)
+                    request.Headers.Add(prop.Key, prop.Value.ToString());
 
                 if (request.Method == HttpMethod.Post || request.Method == HttpMethod.Put)
                 {
