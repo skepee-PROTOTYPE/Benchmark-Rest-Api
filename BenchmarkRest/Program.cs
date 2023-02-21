@@ -35,21 +35,21 @@ namespace BenchmarkRest
                 return;
             }
 
-            var nlogger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
+            //var nlogger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 
-            using ILoggerFactory loggerFactory =
-                       LoggerFactory.Create(builder =>
-                           builder.AddSimpleConsole(options => {
-                               options.IncludeScopes = true;
-                               options.SingleLine = true;
-                               options.TimestampFormat = "hh:mm:ss ";
-                           }).AddConsole()
-                             .AddDebug()
-                             );
+            //using ILoggerFactory loggerFactory =
+            //           LoggerFactory.Create(builder =>
+            //               builder.AddSimpleConsole(options => {
+            //                   options.IncludeScopes = true;
+            //                   options.SingleLine = true;
+            //                   options.TimestampFormat = "hh:mm:ss ";
+            //               }).AddConsole()
+            //                 .AddDebug()
+            //                 );
 
-            ILogger<Program> logger = loggerFactory.CreateLogger<Program>();
+            //ILogger<Program> logger = loggerFactory.CreateLogger<Program>();
 
-            logger.LogInformation("Application started...");
+            //logger.LogInformation("Application started...");
 
             var builder = new HostBuilder()
                 .ConfigureServices((hostContext, services) => {
