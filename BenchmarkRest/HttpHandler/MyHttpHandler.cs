@@ -29,8 +29,11 @@ namespace BenchmarkRest.HttpHandler
                 request.Method = p.httpVerb;
 
                 //adding header values
-                foreach (var prop in p.header.props)
-                    request.Headers.Add(prop.Key, prop.Value.ToString());
+                if (p.header != null)
+                { 
+                    foreach (var prop in p.header.props)
+                        request.Headers.Add(prop.Key, prop.Value.ToString());
+                }
 
                 if (request.Method == HttpMethod.Post || request.Method == HttpMethod.Put)
                 {
@@ -47,8 +50,8 @@ namespace BenchmarkRest.HttpHandler
                     String uri = p.url;
                     long valInt;
 
-                    if (p.apiData!=null && p.apiData.props.Any() && long.TryParse(p.apiData.props.First().Value.ToString(), out valInt))
-                        uri += "/" + (Convert.ToInt64(valInt + i).ToString());
+                    if (p.apiData != null && p.apiData.props.Any() && long.TryParse(p.apiData.props.First().Value.ToString(), out valInt))
+                        uri += p.url.Contains("?")? "" : "/" + (Convert.ToInt64(valInt + i).ToString());
 
                     _logger.LogInformation($"HttpVerb: {request.Method} - Api Data: {uri}");
                     request.RequestUri = new Uri(uri);
