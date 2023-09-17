@@ -40,7 +40,7 @@ namespace BenchmarkRest.HttpHandler
                     if (p.apiData.props.Any())
                     { 
                         request.RequestUri = new Uri(p.url);
-                        string json = p.apiData.UpdateProperties(i);
+                        string json = p.apiData.UpdateProperties(1);
                         _logger.LogInformation($"HttpVerb: {request.Method} - Api Data: {json}");
                         request.Content = new StringContent(json, Encoding.UTF8, "application/json");
                     }
@@ -72,6 +72,7 @@ namespace BenchmarkRest.HttpHandler
                 }
                 else
                     _logger.LogInformation($"{res.StatusCode} - no data at {DateTime.Now.ToString("hh.mm.ss.fff")}");
+
             }
 
             _logger.LogInformation($"Benchmark for {p.url}");
