@@ -51,7 +51,7 @@ namespace BenchmarkRest.HttpHandler
                     long valInt;
 
                     if (p.apiData != null && p.apiData.props.Any() && long.TryParse(p.apiData.props.First().Value.ToString(), out valInt))
-                        uri += p.url.Contains("?")? "" : "/" + (Convert.ToInt64(valInt + i).ToString());
+                        uri += (p.url.Contains("?")? "" : "/") + (Convert.ToInt64(valInt + i).ToString());
 
                     _logger.LogInformation($"HttpVerb: {request.Method} - Api Data: {uri}");
                     request.RequestUri = new Uri(uri);
