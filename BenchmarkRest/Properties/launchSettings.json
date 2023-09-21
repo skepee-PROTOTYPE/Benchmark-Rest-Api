@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "BenchmarkRest": {
-      "commandName": "Project",
-      "commandLineArgs": "https://localhost:7290/api/test 100 g -d {\\\"portfolioId\\\":10} -h {\\\"header1\\\":\\\"header1Value\\\",\\\"header2\\\":\\\"header2Value\\\"}"
-    }
-  }
-}

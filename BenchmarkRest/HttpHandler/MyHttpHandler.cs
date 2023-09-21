@@ -35,27 +35,27 @@ namespace BenchmarkRest.HttpHandler
                         request.Headers.Add(prop.Key, prop.Value.ToString());
                 }
 
-                if (request.Method == HttpMethod.Post || request.Method == HttpMethod.Put)
+                String uri = p.url;
+                long valInt;
+
+                string json="";
+                if (p.url.Contains("?"))
                 {
-                    if (p.apiData.props.Any())
-                    { 
-                        request.RequestUri = new Uri(p.url);
-                        string json = p.apiData.UpdateProperties(1);
-                        _logger.LogInformation($"HttpVerb: {request.Method} - Api Data: {json}");
-                        request.Content = new StringContent(json, Encoding.UTF8, "application/json");
+                    if (long.TryParse(p.apiData.props.First().Value.ToString(), out valInt))
+                    {
+                        uri += (Convert.ToInt64(valInt + i).ToString());
                     }
                 }
                 else
                 {
-                    String uri = p.url;
-                    long valInt;
-
-                    if (p.apiData != null && p.apiData.props.Any() && long.TryParse(p.apiData.props.First().Value.ToString(), out valInt))
-                        uri += (p.url.Contains("?")? "" : "/") + (Convert.ToInt64(valInt + i).ToString());
-
-                    _logger.LogInformation($"HttpVerb: {request.Method} - Api Data: {uri}");
-                    request.RequestUri = new Uri(uri);
+                    if (p.apiData != null && p.apiData.props.Any())
+                    {
+                        json = p.apiData.UpdateProperties(1);
+                        request.Content = new StringContent(json, Encoding.UTF8, "application/json");
+                    }
                 }
+                request.RequestUri = new Uri(uri);
+                _logger.LogInformation($"HttpVerb: {request.Method} - Api Data: {json}");
 
                 var stopwatch = new Stopwatch();
                 stopwatch.Start();
@@ -77,9 +77,9 @@ namespace BenchmarkRest.HttpHandler
 
             _logger.LogInformation($"Benchmark for {p.url}");
             _logger.LogInformation($"Results based on {p.numIterations} iterations: ");
-            _logger.LogInformation($"        Avg elased time: {times.ToList().Average()} ms");
-            _logger.LogInformation($"        Min elased time: {times.ToList().Min()} ms");
-            _logger.LogInformation($"        Max elased time: {times.ToList().Max()} ms");
+            _logger.LogInformation($"        Avg elapsed time: {times.ToList().Average()} ms");
+            _logger.LogInformation($"        Min elapsed time: {times.ToList().Min()} ms");
+            _logger.LogInformation($"        Max elapsed time: {times.ToList().Max()} ms");
         }
     }
 }

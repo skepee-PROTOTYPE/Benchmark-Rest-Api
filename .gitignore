@@ -5,3 +5,4 @@
 /.vs
 /BenchmarkRest/bin/
 /BenchmarkRest/obj
+/BenchmarkRest/Properties/launchSettings.json
